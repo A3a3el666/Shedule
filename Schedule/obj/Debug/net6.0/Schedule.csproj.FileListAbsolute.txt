@@ -35,3 +35,5 @@ D:\Work\Schedule\Schedule\obj\Debug\net6.0\Schedule.pdb
 D:\Work\Schedule\Schedule\obj\Debug\net6.0\Schedule.genruntimeconfig.cache
 D:\Work\Schedule\Schedule\obj\Debug\net6.0\ref\Schedule.dll
 D:\Work\Schedule\Schedule\bin\Debug\net6.0\Dapper.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll

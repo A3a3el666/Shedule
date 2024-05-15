@@ -5,26 +5,23 @@ namespace Schedule.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly IClassRepository _classRepository;
-        private readonly ISubjectRepository _subjectRepository;
-        private readonly IScheduleRepository _scheduleRepository;
-        private readonly ITeacherRepository _teacherRepository;
-        private readonly ITeacherSubjectRepository _teacherSubjectRepository;
+        private readonly ClassRepository _classRepository;
+        private readonly SubjectRepository _subjectRepository;
+        private readonly TeacherRepository _teacherRepository;
+        private readonly TeacherSubjectRepository _teacherSubjectRepository;
 
         public BaseController()
         {
         }
 
         public BaseController(
-            IClassRepository classRepository,
-            ISubjectRepository subjectRepository,
-            IScheduleRepository scheduleRepository,
-            ITeacherRepository teacherRepository,
-            ITeacherSubjectRepository teacherSubjectRepository)
+            ClassRepository classRepository,
+            SubjectRepository subjectRepository,
+            TeacherRepository teacherRepository,
+            TeacherSubjectRepository teacherSubjectRepository)
         {
             _classRepository = classRepository;
             _subjectRepository = subjectRepository;
-            _scheduleRepository = scheduleRepository;
             _teacherRepository = teacherRepository;
             _teacherSubjectRepository = teacherSubjectRepository;
         }

@@ -1,18 +1,15 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Schedule.Models;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddScoped<IClassRepository, ClassRepository>();
-builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
-builder.Services.AddScoped<IScheduleRepository, ScheduleRepository>();
-builder.Services.AddSingleton<TeacherRepository>();
-builder.Services.AddScoped<ITeacherSubjectRepository, TeacherSubjectRepository>();
+builder.Services.AddScoped<ClassRepository>();
+builder.Services.AddScoped<SubjectRepository>();
+builder.Services.AddScoped<TeacherRepository>();
+builder.Services.AddScoped<TeacherSubjectRepository>();
 
 var app = builder.Build();
 
@@ -33,11 +30,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

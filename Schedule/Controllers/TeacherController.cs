@@ -1,20 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Schedule.Models;
 
 namespace Schedule.Controllers
 {
     public class TeacherController : Controller
     {
-        private readonly ITeacherRepository _teacherRepository;
-        private readonly ISubjectRepository _subjectRepository;
-        private readonly IClassRepository _classRepository;
+        private readonly TeacherRepository _teacherRepository;
+        private readonly SubjectRepository _subjectRepository;
+        private readonly ClassRepository _classRepository;
 
         public TeacherController(
-            ITeacherRepository teacherRepository, 
-            ISubjectRepository subjectRepository, 
-            IClassRepository classRepository
-            )
+            TeacherRepository teacherRepository,
+            SubjectRepository subjectRepository,
+            ClassRepository classRepository)
         {
             _teacherRepository = teacherRepository;
             _subjectRepository = subjectRepository;
@@ -27,14 +25,12 @@ namespace Schedule.Controllers
             return View(teachers);
         }
 
-        
         [HttpGet]
         public IActionResult AddTeacherForm()
         {
             return View();
         }
 
-        
         [HttpPost]
         public IActionResult AddTeacher(string fullName, string roomNumber)
         {
@@ -119,8 +115,5 @@ namespace Schedule.Controllers
 
             return RedirectToAction("AllTeachersForm", "Teacher");
         }
-
-
     }
 }
-

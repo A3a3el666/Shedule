@@ -1,97 +1,58 @@
-﻿using Npgsql;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Schedule.Data;
+using Schedule.Models;
 
-namespace Schedule.Models
+namespace Schedule.Repositories
 {
-    public interface IScheduleRepository
+    public class ScheduleRepository
     {
-        void SaveSchedule(int classId, Dictionary<string, List<ScheduleEntry>> schedule);
-        IEnumerable<Schedule> GetSchedules();
-    }
+        private readonly ApplicationDbContext _context;
 
-    public class ScheduleRepository : IScheduleRepository
-    {
-        private readonly string _connectionString;
-
-        public ScheduleRepository(IConfiguration configuration)
+        public ScheduleRepository(ApplicationDbContext context)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
-        }
-        //---------------------------------------------------------------------
-
-        public void SaveSchedule(int classId, Dictionary<string, List<ScheduleEntry>> schedule)
-        {
-            using (var connection = new NpgsqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                using (var transaction = connection.BeginTransaction())
-                {
-                    foreach (var day in schedule.Keys)
-                    {
-                        foreach (var entry in schedule[day])
-                        {
-                            var command = new NpgsqlCommand(
-                                @"INSERT INTO schedules (class_id, day_of_week, subject_id, teacher_id, start_time, end_time)
-                          VALUES (@ClassId, @DayOfWeek, @SubjectId, @TeacherId, @StartTime, @EndTime)",
-                                connection, transaction);
-
-                            command.Parameters.AddWithValue("@ClassId", classId);
-                            command.Parameters.AddWithValue("@DayOfWeek", day);
-                            command.Parameters.AddWithValue("@SubjectId", entry.SubjectId);
-                            command.Parameters.AddWithValue("@TeacherId", entry.TeacherId);
-                            command.Parameters.AddWithValue("@StartTime", entry.StartTime);
-                            command.Parameters.AddWithValue("@EndTime", entry.EndTime);
-
-                            // Выводим информацию о добавлении в консоль
-                            Console.WriteLine($"Добавлено расписание для класса {classId}, день недели: {day}, предмет: {entry.SubjectId}, учитель: {entry.TeacherId}");
-
-                            command.ExecuteNonQuery();
-                        }
-                    }
-
-                    transaction.Commit();
-                }
-            }
+            _context = context;
         }
 
-        //---------------------------------------------------------------------
-
-
-        public IEnumerable<Schedule> GetSchedules()
+        public List<ScheduleEntry> GenerateSchedule(int classId)
         {
-            var schedulesWithDetails = new List<Schedule>();
+            var classObj = _context.Classes
+                .Include(c => c.Subjects)
+                .FirstOrDefault(c => c.ClassId == classId);
 
-            using (var connection = new NpgsqlConnection(_connectionString))
+            if (classObj == null)
+                throw new InvalidOperationException("Class not found");
+
+            var schedule = new List<ScheduleEntry>();
+
+            foreach (var dayOfWeek in Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>())
             {
-                connection.Open();
-
-                using (var command = new NpgsqlCommand(@"
-            SELECT s.schedule_id, c.class_number, s.day_of_week, sub.subject_name, t.full_name, s.start_time, s.end_time
-            FROM schedules s
-            INNER JOIN class c ON s.class_id = c.class_id
-            INNER JOIN subject sub ON s.subject_id = sub.subject_id
-            INNER JOIN teacher t ON s.teacher_id = t.teacher_id", connection))
-                using (var reader = command.ExecuteReader())
+                foreach (var subject in classObj.Subjects)
                 {
-                    while (reader.Read())
+                    var randomTeacher = _context.Teachers.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+                    if (randomTeacher == null)
+                        throw new InvalidOperationException("No teachers found");
+
+                    var startTime = new TimeSpan(8, 0, 0); // Start at 8:00 AM
+                    var endTime = new TimeSpan(9, 0, 0);   // End at 9:00 AM
+
+                    var entry = new ScheduleEntry
                     {
-                        schedulesWithDetails.Add(new Schedule
-                        {
-                            ScheduleId = reader.GetInt32(reader.GetOrdinal("schedule_id")),
-                            ClassName = reader.GetString(reader.GetOrdinal("class_number")),
-                            DayOfWeek = reader.GetString(reader.GetOrdinal("day_of_week")),
-                            SubjectName = reader.GetString(reader.GetOrdinal("subject_name")),
-                            TeacherName = reader.GetString(reader.GetOrdinal("full_name")),
-                            StartTime = reader.GetTimeSpan(reader.GetOrdinal("start_time")),
-                            EndTime = reader.GetTimeSpan(reader.GetOrdinal("end_time"))
-                        });
-                    }
+                        ClassId = classObj.ClassId,
+                        SubjectId = subject.SubjectId,
+                        TeacherId = randomTeacher.TeacherId,
+                        DayOfWeek = dayOfWeek,
+                        StartTime = startTime,
+                        EndTime = endTime
+                    };
+
+                    schedule.Add(entry);
                 }
             }
 
-            return schedulesWithDetails;
+            return schedule;
         }
-
     }
-
 }

@@ -9,11 +9,10 @@ namespace Schedule.Models
     public interface ISubjectRepository
     {
         IEnumerable<Subject> GetAllSubjects();
-        void AddSubject(Subject subject);
-        void DeleteSubject(int subjectId);
     }
     public class SubjectRepository : ISubjectRepository
     {
+
         private readonly string _connectionString;
 
         public SubjectRepository(IConfiguration configuration)

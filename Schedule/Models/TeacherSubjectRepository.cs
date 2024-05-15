@@ -10,7 +10,7 @@ namespace Schedule.Models
         IEnumerable<TeacherSubject> GetAllTeacherSubjects();
     }
 
-    public class TeacherSubjectRepository : ITeacherSubjectRepository
+    public class TeacherSubjectRepository   : ITeacherSubjectRepository
     {
         private readonly string _connectionString;
 

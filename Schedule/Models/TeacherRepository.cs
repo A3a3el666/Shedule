@@ -9,14 +9,8 @@ namespace Schedule.Models
     public interface ITeacherRepository
     {
         IEnumerable<Teacher> GetAllTeachers();
-        void AddTeacher(string fullName, string roomNumber);
-        void DeleteTeacher(int teacherId);
-        void AddSubjectToTeacher(int teacherId, int[] subjectIds);
-        void AddClassToTeacher(int teacherId, int[] classIds);
-        Teacher GetTeacherById(int teacherId);
-
     }
-    public class TeacherRepository : ITeacherRepository
+    public class TeacherRepository  : ITeacherRepository
     {
         private readonly string _connectionString;
 

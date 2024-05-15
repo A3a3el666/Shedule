@@ -9,13 +9,10 @@ namespace Schedule.Models
     public interface IClassRepository
     {
         IEnumerable<Class> GetAllClasses();
-        void AddClass(string classNumber);
-        void DeleteClass(int classId);
-        void AddSubjectToClass(int classId, int[] subjectIds, int[] hoursPerWeek);
-        Class GetClassById(int id);
     }
     public class ClassRepository : IClassRepository
     {
+
         private readonly string _connectionString;
 
         public ClassRepository(IConfiguration configuration)
