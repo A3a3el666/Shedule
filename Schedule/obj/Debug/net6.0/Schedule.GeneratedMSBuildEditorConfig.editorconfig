@@ -1,0 +1,81 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Schedule
+build_property.RootNamespace = Schedule
+build_property.ProjectDir = D:\Work\Schedule\Schedule\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Work\Schedule\Schedule
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Work/Schedule/Schedule/Views/Class/AddClassForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcQWRkQ2xhc3NGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Class/AddSubjectToCLassForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcQWRkU3ViamVjdFRvQ0xhc3NGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Class/AllClassesForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcQWxsQ2xhc3Nlc0Zvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Class/DeleteClassForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcRGVsZXRlQ2xhc3NGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Schedule/CreateScheduleForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NoZWR1bGVcQ3JlYXRlU2NoZWR1bGVGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Schedule/ScheduleResult.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NoZWR1bGVcU2NoZWR1bGVSZXN1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Schedule/ViewScheduleForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NoZWR1bGVcVmlld1NjaGVkdWxlRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Subject/AddSubjectForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxBZGRTdWJqZWN0Rm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Subject/AllSubjectsForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxBbGxTdWJqZWN0c0Zvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Subject/DeleteSubjectForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxEZWxldGVTdWJqZWN0Rm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Teacher/AddClassToTeacherForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxBZGRDbGFzc1RvVGVhY2hlckZvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Teacher/AddSubjectToTeacherForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxBZGRTdWJqZWN0VG9UZWFjaGVyRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Teacher/AddTeacherForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxBZGRUZWFjaGVyRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Teacher/AllTeachersForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxBbGxUZWFjaGVyc0Zvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/Schedule/Schedule/Views/Teacher/DeleteTeacherForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxEZWxldGVUZWFjaGVyRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        * {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        body {
+            margin-top: 5px;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 50%;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: darkblue;
+                text-decoration: underline;
+            }
+
+        .button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+        }
+
+            .button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Действия с Учителями</th>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AllTeachersForm", "Teacher")" class="button">Все учителя</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddTeacherForm", "Teacher")" class="button">Добавить учителя</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddSubjectToTeacherForm", "Teacher")" class="button">Добавить предметы учителю</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddClassToTeacherForm", "Teacher")" class="button">Добавить классы учителю</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("DeleteTeacherForm", "Teacher")" class="button">Удалить учителя</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <th>Действия с Классамии</th>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AllClassesForm", "Class")" class="button">Все классы</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddClassForm", "Class")" class="button">Добавить класс</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddSubjectToClassForm", "Class")" class="button">Добавить предметы классу</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("DeleteClassForm", "Class")" class="button">Удалить класс</a></td>
+        </tr>
+        <tr>
+            <th>Действия с Предметами</th>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AllSubjectsForm", "Subject")" class="button">Все предметы</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddSubjectForm", "Subject")" class="button">Добавить предмет</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("DeleteSubjectForm", "Subject")" class="button">Удалить предмет</a></td>
+        </tr>
+        <tr>
+            <th>Действия с Расписанием</th>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewScheduleForm", "Schedule")" class="button">Посмотреть расписание</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("CreateScheduleForm", "Schedule")" class="button">Создать расписание</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("CreateScheduleForAllClassesForm", "Schedule")" class="button">Создать Все расписание</a></td>
+        </tr>
+    </table>
+</body>
+</html>

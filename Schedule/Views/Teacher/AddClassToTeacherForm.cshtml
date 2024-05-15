@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Add Class to Teacher";
+    var classes = ViewBag.Classes as IEnumerable<Schedule.Models.Class>;
+    var teachers = ViewBag.Teachers as IEnumerable<Schedule.Models.Teacher>;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Class to Teacher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .back-button:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <h2>Add Class to Teacher</h2>
+
+    <form method="post" action="@Url.Action("AddClassToTeacher", "Teacher")" id="addClassForm">
+        <div class="form-group">
+            <label for="teacherId">Select Teacher:</label>
+            <select class="form-control" id="teacherId" name="teacherId" required>
+                <option value="">Select Teacher</option>
+                @foreach (var teacher in ViewBag.Teachers)
+                {
+                    <option value="@teacher.TeacherId">@teacher.FullName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Select Classes:</label>
+            @foreach (var classObj in ViewBag.Classes)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="class_@classObj.ClassId" name="selectedClasses" value="@classObj.ClassId">
+                    <label class="form-check-label" for="class_@classObj.ClassId">@classObj.ClassNumber</label>
+                </div>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Add Classes</button>
+    </form>
+
+    <script>
+        document.getElementById("addClassForm").addEventListener("submit", function(event) {
+            var teacherId = document.getElementById("teacherId").value;
+            var selectedClasses = document.querySelectorAll('input[name="selectedClasses"]:checked').length;
+
+            if (teacherId === "") {
+                alert("Please select a teacher.");
+                event.preventDefault();
+            }
+
+            if (selectedClasses === 0) {
+                alert("Please select at least one class.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

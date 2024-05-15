@@ -1,0 +1,60 @@
+﻿@model List<Schedule.Models.ScheduleViewModel>
+
+@{
+    ViewData["Title"] = "Create Schedule";
+}
+
+<h2>Create Schedule</h2>
+
+<form asp-action="SaveSchedule" method="post">
+    @foreach (var classSchedule in Model)
+    {
+        <h3>Class: @classSchedule.ClassName</h3>
+        <input type="hidden" name="[@Model.IndexOf(classSchedule)].ClassId" value="@classSchedule.ClassId" />
+        <input type="hidden" name="[@Model.IndexOf(classSchedule)].ClassName" value="@classSchedule.ClassName" />
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    @foreach (var day in classSchedule.Schedule.Keys)
+                    {
+                        <th>@day</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < 7; i++) // 7 временных интервалов
+                {
+                    <tr>
+                        <td>@(8 + i):00 - @(9 + i):00</td>
+                        @foreach (var day in classSchedule.Schedule.Keys)
+                        {
+                            var entry = classSchedule.Schedule[day][i];
+                            <td>
+                                <input type="hidden" name="[@Model.IndexOf(classSchedule)].Schedule[@day][@i].StartTime" value="@entry.StartTime" />
+                                <input type="hidden" name="[@Model.IndexOf(classSchedule)].Schedule[@day][@i].EndTime" value="@entry.EndTime" />
+
+                                <select name="[@Model.IndexOf(classSchedule)].Schedule[@day][@i].SubjectId">
+                                    <option value="">Select Subject</option>
+                                    @foreach (var subjectTeacher in classSchedule.SubjectTeachers)
+                                    {
+                                        <option value="@subjectTeacher.SubjectId">@subjectTeacher.SubjectName</option>
+                                    }
+                                </select>
+                                <select name="[@Model.IndexOf(classSchedule)].Schedule[@day][@i].TeacherId">
+                                    <option value="">Select Teacher</option>
+                                    @foreach (var subjectTeacher in classSchedule.SubjectTeachers)
+                                    {
+                                        <option value="@subjectTeacher.TeacherId">@subjectTeacher.TeacherName</option>
+                                    }
+                                </select>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <button type="submit" class="btn btn-primary">Save Schedule</button>
+</form>

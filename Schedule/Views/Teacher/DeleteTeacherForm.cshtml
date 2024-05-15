@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Teacher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 15px;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #c82333;
+            }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+            .back-button:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <h2>Delete Teacher</h2>
+    <form method="post" action="@Url.Action("DeleteTeacher", "Teacher")">
+        <label for="teacherId">Select Teacher:</label>
+        <select id="teacherId" name="teacherId" required>
+            <option value="">Select a teacher</option>
+            @foreach (var teacher in Model)
+            {
+                <option value="@teacher.TeacherId">@teacher.FullName</option>
+            }
+        </select>
+        <button type="submit">Delete</button>
+    </form>
+    <a href="@Url.Action("AllTeachersForm", "Teacher")" class="back-button">Back to All Teachers</a>
+</body>
+</html>

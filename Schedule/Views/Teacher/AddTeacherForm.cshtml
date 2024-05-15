@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавление нового учителя</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .back-button:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <h2>Добавить нового учителя</h2>
+    <form method="post" action="@Url.Action("AddTeacher", "Teacher")">
+        <div>
+            <label for="FullName">ФИО:</label>
+            <input type="text" id="FullName" name="FullName" required />
+        </div>
+        <div>
+            <label for="RoomNumber">Номер кабинета:</label>
+            <input type="text" id="RoomNumber" name="RoomNumber" required />
+        </div>
+        <button type="submit">Добавить учителя</button>
+        <a href="@Url.Action("AllTeachersForm", "Teacher")" class="back-button">Назад к списку учителей</a>
+    </form>
+</body>
+</html>

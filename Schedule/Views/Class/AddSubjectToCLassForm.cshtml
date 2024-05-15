@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Schedule.Models.Subject>
+@{
+    ViewData["Title"] = "Add Subjects to Class";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Subjects to Class</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .back-button:hover {
+                background-color: #45a049;
+            }
+    </style>
+    <script>
+        function toggleHoursInput(subjectId) {
+            var subjectCheckbox = document.getElementById('subject_' + subjectId);
+            var hoursInput = document.getElementById('hoursPerWeek_' + subjectId);
+
+            if (subjectCheckbox.checked) {
+                hoursInput.style.display = 'block';
+                hoursInput.required = true;
+            } else {
+                hoursInput.style.display = 'none';
+                hoursInput.required = false;
+                hoursInput.value = ''; // Сбрасываем значение, чтобы не отправлять его
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Add Subjects to Class</h2>
+
+    <form method="post" action="@Url.Action("AddSubjectToClass", "Class")">
+        <div class="form-group">
+            <label>Select Class:</label>
+            <select class="form-control" name="classId">
+                @foreach (var classObj in ViewBag.Classes)
+                {
+                    <option value="@classObj.ClassId">@classObj.ClassNumber</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Select Subjects:</label>
+            @foreach (var subject in ViewBag.Subjects)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="subject_@subject.SubjectId" name="subjectIds[]" value="@subject.SubjectId" onchange="toggleHoursInput(@subject.SubjectId)">
+                    <label class="form-check-label" for="subject_@subject.SubjectId">@subject.SubjectName</label>
+                    <input type="number" class="form-control" id="hoursPerWeek_@subject.SubjectId" name="subjectHours[@subject.SubjectId]" placeholder="Enter hours per week for @subject.SubjectName" style="display: none;">
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Subjects</button>
+    </form>
+</body>
+</html>

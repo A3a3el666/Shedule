@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Schedule.Models.Teacher>
+@inject Schedule.Models.TeacherRepository _teacherRepository
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Teachers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 30px 0;
+        }
+
+            .back-button:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <h1>All Teachers</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Room Number</th>
+                <th>Subjects</th>
+                <th>Classes
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var teacher in Model)
+            {
+                <tr>
+                    <td>@teacher.FullName</td>
+                    <td>@teacher.RoomNumber</td>
+                    <td>
+                        <ul>
+                            @foreach (var subject in teacher.Subjects)
+                            {
+                                <li>@subject.SubjectName</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach (var classObj in teacher.Classes)
+                            {
+                                <li>@classObj.ClassNumber</li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="@Url.Action("Index", "Home")" class="back-button">Back to Home</a>
+</body>
+</html>
