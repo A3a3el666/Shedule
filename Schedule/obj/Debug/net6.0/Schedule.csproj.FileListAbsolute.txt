@@ -5,13 +5,7 @@ D:\Work\Schedule\Schedule\bin\Debug\net6.0\Schedule.deps.json
 D:\Work\Schedule\Schedule\bin\Debug\net6.0\Schedule.runtimeconfig.json
 D:\Work\Schedule\Schedule\bin\Debug\net6.0\Schedule.dll
 D:\Work\Schedule\Schedule\bin\Debug\net6.0\Schedule.pdb
-D:\Work\Schedule\Schedule\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-D:\Work\Schedule\Schedule\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Work\Schedule\Schedule\bin\Debug\net6.0\Npgsql.dll
-D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
-D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Text.Encodings.Web.dll
-D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Text.Json.dll
-D:\Work\Schedule\Schedule\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 D:\Work\Schedule\Schedule\obj\Debug\net6.0\Schedule.csproj.AssemblyReference.cache
 D:\Work\Schedule\Schedule\obj\Debug\net6.0\Schedule.GeneratedMSBuildEditorConfig.editorconfig
 D:\Work\Schedule\Schedule\obj\Debug\net6.0\Schedule.AssemblyInfoInputs.cache
@@ -37,3 +31,12 @@ D:\Work\Schedule\Schedule\obj\Debug\net6.0\ref\Schedule.dll
 D:\Work\Schedule\Schedule\bin\Debug\net6.0\Dapper.dll
 D:\Work\Schedule\Schedule\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 D:\Work\Schedule\Schedule\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Web.Mvc.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Web.Razor.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Web.Helpers.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\System.Web.WebPages.dll
+D:\Work\Schedule\Schedule\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

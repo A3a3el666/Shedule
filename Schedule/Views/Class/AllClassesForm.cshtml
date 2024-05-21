@@ -74,7 +74,7 @@
                     <td>@classObj.ClassNumber</td>
                     <td>
                         <ul>
-                            @foreach (var subject in classObj.Subjects)
+                            @foreach (var subject in classObj.ClassSubjects)
                             {
                                 <li>@subject.SubjectName - @subject.HoursPerWeek часа</li>
                             }

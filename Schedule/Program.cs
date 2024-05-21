@@ -1,15 +1,22 @@
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Schedule.Data;
 using Schedule.Models;
+using Schedule.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = "Server=localhost;Port=5432;Database=schedule;User Id=postgres;Password=123;";
 
 // Add services to the container.
+builder.Services.AddDbContext<SchoolContext>(options =>
+    options.UseNpgsql(connectionString));
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ClassRepository>();
 builder.Services.AddScoped<SubjectRepository>();
 builder.Services.AddScoped<TeacherRepository>();
 builder.Services.AddScoped<TeacherSubjectRepository>();
+
+builder.Services.AddScoped<ScheduleService>(); // Регистрация сервиса расписания
 
 var app = builder.Build();
 

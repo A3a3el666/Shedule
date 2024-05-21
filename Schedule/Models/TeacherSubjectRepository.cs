@@ -5,12 +5,8 @@ using Dapper;
 
 namespace Schedule.Models
 {
-    public interface ITeacherSubjectRepository
-    {
-        IEnumerable<TeacherSubject> GetAllTeacherSubjects();
-    }
 
-    public class TeacherSubjectRepository   : ITeacherSubjectRepository
+    public class TeacherSubjectRepository 
     {
         private readonly string _connectionString;
 

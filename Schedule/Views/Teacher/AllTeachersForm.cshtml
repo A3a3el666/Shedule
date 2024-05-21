@@ -78,7 +78,7 @@
                     <td>@teacher.RoomNumber</td>
                     <td>
                         <ul>
-                            @foreach (var subject in teacher.Subjects)
+                            @foreach (var subject in teacher.TeacherSubjects)
                             {
                                 <li>@subject.SubjectName</li>
                             }
@@ -86,7 +86,7 @@
                     </td>
                     <td>
                         <ul>
-                            @foreach (var classObj in teacher.Classes)
+                            @foreach (var classObj in teacher.TeacherClasses)
                             {
                                 <li>@classObj.ClassNumber</li>
                             }

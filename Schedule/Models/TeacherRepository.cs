@@ -6,11 +6,7 @@ using Schedule.Models;
 
 namespace Schedule.Models
 {
-    public interface ITeacherRepository
-    {
-        IEnumerable<Teacher> GetAllTeachers();
-    }
-    public class TeacherRepository  : ITeacherRepository
+    public class TeacherRepository
     {
         private readonly string _connectionString;
 
@@ -47,32 +43,32 @@ namespace Schedule.Models
                                 TeacherId = teacherId,
                                 FullName = reader.GetString(reader.GetOrdinal("full_name")),
                                 RoomNumber = reader.GetString(reader.GetOrdinal("room_number")),
-                                Classes = new List<Class>(),
-                                Subjects = new List<Subject>()
+                                TeacherClasses = new List<Class>(),
+                                TeacherSubjects = new List<Subject>()
                             };
                             teachersDict.Add(teacherId, teacher);
                         }
 
                         var classId = reader.IsDBNull(reader.GetOrdinal("class_id")) ? -1 : reader.GetInt32(reader.GetOrdinal("class_id"));
-                        if (classId != -1 && teacher.Classes.All(c => c.ClassId != classId))
+                        if (classId != -1 && teacher.TeacherClasses.All(c => c.ClassId != classId))
                         {
                             var classObj = new Class
                             {
                                 ClassId = classId,
                                 ClassNumber = reader.GetString(reader.GetOrdinal("class_number"))
                             };
-                            teacher.Classes.Add(classObj);
+                            teacher.TeacherClasses.Add(classObj);
                         }
 
                         var subjectId = reader.IsDBNull(reader.GetOrdinal("subject_id")) ? -1 : reader.GetInt32(reader.GetOrdinal("subject_id"));
-                        if (subjectId != -1 && teacher.Subjects.All(s => s.SubjectId != subjectId))
+                        if (subjectId != -1 && teacher.TeacherSubjects.All(s => s.SubjectId != subjectId))
                         {
                             var subject = new Subject
                             {
                                 SubjectId = subjectId,
                                 SubjectName = reader.GetString(reader.GetOrdinal("subject_name"))
                             };
-                            teacher.Subjects.Add(subject);
+                            teacher.TeacherSubjects.Add(subject);
                         }
                     }
                 }
@@ -80,7 +76,6 @@ namespace Schedule.Models
 
             return teachersDict.Values;
         }
-
 
         //-------------------------------------------------------------
         public void AddTeacher(string fullName, string roomNumber)
@@ -103,21 +98,18 @@ namespace Schedule.Models
             {
                 connection.Open();
 
-                // Удаление связей учителя с предметами
                 using (var deleteTeacherSubjectCommand = new NpgsqlCommand("DELETE FROM teacher_subject WHERE teacher_id = @TeacherId", connection))
                 {
                     deleteTeacherSubjectCommand.Parameters.AddWithValue("@TeacherId", teacherId);
                     deleteTeacherSubjectCommand.ExecuteNonQuery();
                 }
 
-                // Удаление связей учителя с классами
                 using (var deleteTeacherClassCommand = new NpgsqlCommand("DELETE FROM teacher_class WHERE teacher_id = @TeacherId", connection))
                 {
                     deleteTeacherClassCommand.Parameters.AddWithValue("@TeacherId", teacherId);
                     deleteTeacherClassCommand.ExecuteNonQuery();
                 }
 
-                // Удаление учителя
                 using (var deleteTeacherCommand = new NpgsqlCommand("DELETE FROM teacher WHERE teacher_id = @TeacherId", connection))
                 {
                     deleteTeacherCommand.Parameters.AddWithValue("@TeacherId", teacherId);
@@ -126,7 +118,6 @@ namespace Schedule.Models
             }
         }
 
-        //-------------------------------------------------------------
         //-------------------------------------------------------------
         public void AddSubjectToTeacher(int teacherId, int[] subjectIds)
         {
@@ -178,11 +169,6 @@ namespace Schedule.Models
             }
         }
 
-
-        //-------------------------------------------------------------
-        //-------------------------------------------------------------
-
-
         //-------------------------------------------------------------
         public Teacher GetTeacherById(int teacherId)
         {
@@ -212,7 +198,6 @@ namespace Schedule.Models
             }
         }
 
-        //-------------------------------------------------------------
 
 
     }

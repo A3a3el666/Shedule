@@ -1,28 +1,103 @@
-﻿@using Schedule.Models
-@model List<ScheduleEntry>
+﻿@model Schedule.Models.ScheduleViewModel
 
-<h1>School Schedule</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Day</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Subject</th>
-            <th>Teacher</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var entry in Model)
-        {
-            <tr>
-                <td>@entry.DayOfWeek</td>
-                <td>@entry.StartTime</td>
-                <td>@entry.EndTime</td>
-                <td>@entry.Subject.SubjectName</td>
-                <td>@entry.Teacher.FullName</td>
-            </tr>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
         }
-    </tbody>
-</table>
+
+        .schedule-container {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .schedule-header, .schedule-row {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .cell {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .time-cell {
+            width: 100px; /* фиксированная ширина для временных ячеек */
+            font-weight: bold;
+        }
+
+        .day-cell {
+            background-color: lightgray;
+            font-weight: bold;
+        }
+
+        .class-cell {
+            background-color: #f9f9f9;
+        }
+
+        .header-empty {
+            border: none;
+        }
+
+        .class-number {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Generated Schedule</h2>
+    <div class="schedule-container">
+        <!-- Header Row -->
+        <div class="schedule-header">
+            <div class="cell header-empty"></div>
+            <div class="cell day-cell">Понедельник</div>
+            <div class="cell day-cell">Вторник</div>
+            <div class="cell day-cell">Среда</div>
+            <div class="cell day-cell">Четверг</div>
+            <div class="cell day-cell">Пятница</div>
+        </div>
+
+        @foreach (var classNumber in Model.Entries.Select(e => e.ClassNumber).Distinct())
+        {
+            <div class="schedule-header">
+                <div class="cell class-number">@classNumber</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+
+            @foreach (var timeInterval in Model.TimeIntervals)
+            {
+                <div class="schedule-row">
+                    <div class="cell time-cell">@timeInterval.StartTime.ToString(@"hh\:mm") - @timeInterval.EndTime.ToString(@"hh\:mm")</div>
+                    @foreach (var day in Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Where(d => d >= DayOfWeek.Monday && d <= DayOfWeek.Friday))
+                    {
+                        var entry = Model.Entries.FirstOrDefault(e => e.ClassNumber == classNumber && e.DayOfWeek == day && e.StartTime == timeInterval.StartTime && e.EndTime == timeInterval.EndTime);
+                        if (entry != null)
+                        {
+                            <div class="cell class-cell">
+                                <p>@entry.SubjectName</p>
+                                <p>@entry.TeacherName</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="cell class-cell"></div>
+                        }
+                    }
+                </div>
+            }
+        }
+    </div>
+</body>
+</html>

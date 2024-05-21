@@ -6,11 +6,7 @@ using Schedule.Models;
 
 namespace Schedule.Models
 {
-    public interface ISubjectRepository
-    {
-        IEnumerable<Subject> GetAllSubjects();
-    }
-    public class SubjectRepository : ISubjectRepository
+    public class SubjectRepository
     {
 
         private readonly string _connectionString;

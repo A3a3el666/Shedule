@@ -6,13 +6,8 @@ using Schedule.Models;
 
 namespace Schedule.Models
 {
-    public interface IClassRepository
+    public class ClassRepository
     {
-        IEnumerable<Class> GetAllClasses();
-    }
-    public class ClassRepository : IClassRepository
-    {
-
         private readonly string _connectionString;
 
         public ClassRepository(IConfiguration configuration)
@@ -43,7 +38,7 @@ namespace Schedule.Models
                             {
                                 ClassId = classId,
                                 ClassNumber = reader.GetString(reader.GetOrdinal("class_number")),
-                                Subjects = new List<Subject>()
+                                ClassSubjects = new List<ClassSubject>()
                             };
                             classes.Add(@class);
                         }
@@ -51,13 +46,13 @@ namespace Schedule.Models
                         var subjectId = reader.IsDBNull(reader.GetOrdinal("subject_id")) ? -1 : reader.GetInt32(reader.GetOrdinal("subject_id"));
                         if (subjectId != -1)
                         {
-                            var subject = new Subject
+                            var subject = new ClassSubject
                             {
                                 SubjectId = subjectId,
                                 SubjectName = reader.GetString(reader.GetOrdinal("subject_name")),
                                 HoursPerWeek = reader.IsDBNull(reader.GetOrdinal("hour_per_week")) ? 0 : reader.GetInt32(reader.GetOrdinal("hour_per_week"))
                             };
-                            @class.Subjects.Add(subject);
+                            @class.ClassSubjects.Add(subject);
                         }
                     }
                 }
@@ -65,6 +60,7 @@ namespace Schedule.Models
 
             return classes;
         }
+
 
 
 
